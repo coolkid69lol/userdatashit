@@ -1537,21 +1537,9 @@ local randomvaluemed = 32
 
 client.set_event_callback("aim_fire", function(handle)
 
-	--randomvalue = math.random(-52,-44)
-	--randomvaluemed = math.random(-44,-30)
-	--randomvaluelow = math.random(-30,-25)
-	
-	randomshit = math.random(-1,0)
-	
-	if randomshit == -1 then
-		randomvalue = math.random(-52,-44)
-		randomvaluemed = math.random(-44,-30)
-		randomvaluelow = math.random(-30,-25)
-	elseif randomshit == 0 then
-		randomvalue = math.random(52,44)
-		randomvaluemed = math.random(44,30)
-		randomvaluelow = math.random(26,22)
-	end
+	randomvalue = math.random(52,44)
+	randomvaluemed = math.random(39,32)
+	randomvaluelow = math.random(30,25)
 	
 end)
 
@@ -2027,46 +2015,46 @@ function resolver_c:render()
 				bruteforce_phases = {
             -- Standing Players
             standing = {
-                [1] = -randomvalue,
-				[2] = randomvalue,
+                [1] = randomvaluemed,
+				[2] = randomvaluemed,
 				[3] = max_yaw,
-				[4] = randomvaluelow
+				[4] = max_yaw
 			},
 			moving = {
-				[1] = -37,
-				[2] = 37,
-				[3] = randomvaluemed,
-				[4] = 0
-			},
-			air = {
-				[1] = -28,
-				[2] = 28,
-				[3] = randomvaluemed,
-				[4] = 0
-			},
-			slowwalk = {
-                [1] = -max_yaw2 - 10,
-				[2] = max_yaw2 + 10,
-				[3] = randomvaluemed,
-				[4] = randomvaluelow
-			},
-			pressing_e = {
-				[1] = 38,
-				[2] = 38,
-				[3] = randomvaluelow,
-				[4] = -18
-			},
-			onshot = {
-				[1] = 45,
-				[2] = -45,
+				[1] = max_yaw,
+				[2] = max_yaw,
 				[3] = randomvaluemed,
 				[4] = randomvaluemed
 			},
-            other = {
-                [1] = -max_yaw,
-				[2] = max_yaw,
+			air = {
+				[1] = randomvaluemed,
+				[2] = 0,
+				[3] = max_yaw,
+				[4] = max_yaw
+			},
+			slowwalk = {
+                [1] = randomvaluelow,
+				[2] = randomvaluelow,
+				[3] = randomvaluemed,
+				[4] = randomvaluemed
+			},
+			pressing_e = {
+				[1] = max_yaw,
+				[2] = 0,
 				[3] = randomvaluelow,
-				[4] = 0
+				[4] = randomvaluelow
+			},
+			onshot = {
+				[1] = randomvaluelow,
+				[2] = 0,
+				[3] = max_yaw,
+				[4] = max_yaw
+			},
+            other = {
+                [1] = max_yaw,
+				[2] = randomvaluemed,
+				[3] = randomvaluelow,
+				[4] = randomvaluemed
 			},
         }
 
