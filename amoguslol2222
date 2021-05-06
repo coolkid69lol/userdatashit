@@ -2052,9 +2052,9 @@ function resolver_c:render()
 			},
             other = {
                 [1] = max_yaw,
-				[2] = randomvaluemed,
+				[2] = randomvaluelow,
 				[3] = randomvaluelow,
-				[4] = randomvaluemed
+				[4] = max_yaw
 			},
         }
 
@@ -2080,7 +2080,7 @@ function resolver_c:render()
 		end
 		--in air
 		if air then
-			fix_value = bruteforce_phases.air[calculate_phase]*calculate_invert*calculate_angles
+			fix_value = bruteforce_phases.air[calculate_phase_sw]*calculate_invert*calculate_angles
 			state = "Jumping"
 		end
 		--e peek
@@ -2090,25 +2090,27 @@ function resolver_c:render()
 		end
 		--e peek
 		if onshot then
-			fix_value = bruteforce_phases.onshot[calculate_phase]*calculate_invert*calculate_angles
+			fix_value = bruteforce_phases.onshot[calculate_phase_sw]*calculate_invert*calculate_angles
 			state = "Firing"
 		end
 		--forward
-		if sideways_forward then
-			fix_value = (max_yaw/2 + (max_yaw/4))*calculate_invert*calculate_angles*(-2)
-			state = "Forward AA"
-		end
+		--if sideways_forward then
+		--	fix_value = (max_yaw/2 + (max_yaw/4))*calculate_invert*calculate_angles*(-2)
+		--	state = "Forward AA"
+		--end
 		--sideways
-		if sideways_left_right then
-			fix_value = (max_yaw/2 - 4)*calculate_invert*calculate_angles
-			state = "Left/Right AA"
-		end
+		--if sideways_left_right then
+		--	fix_value = (max_yaw/2 - 4)*calculate_invert*calculate_angles
+		--	state = "Left/Right AA"
+		--end
 		
 		self.freestand_data[target].side_fix = fix_value > 0 and "right" or "left"
 		
 		
 		plist.set(target, "Force body yaw", true)
 		plist.set(target, "Force body yaw value", fix_value)
+		--local indicator = renderer.indicator
+		--indicator(255,255,255,255, state, '{',max_yaw,'}', '[',fix_value,']')
 	
     end
 end
