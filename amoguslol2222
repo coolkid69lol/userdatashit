@@ -495,6 +495,7 @@ function resolver_c:render()
 		--if ui.get(ui_options_resolver) == "gladio resolver" then
 			plist.set(target, "Force body yaw", true)
 			plist.set(target, "Force body yaw value", fix_value)
+			client.color_log(255, 255, 255, "SOLSS")
 		--end
     end
 end
