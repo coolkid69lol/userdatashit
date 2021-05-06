@@ -1,3 +1,68 @@
+local randomvaluelow = 25
+local randomvalue = 50
+local randomvaluemed = 32
+
+client.set_event_callback("aim_fire", function(handle)
+
+	--randomvalue = math.random(-52,-44)
+	--randomvaluemed = math.random(-44,-30)
+	--randomvaluelow = math.random(-30,-25)
+	
+	randomshit = math.random(-1,0)
+	
+	if randomshit == -1 then
+		randomvalue = math.random(-52,-44)
+		randomvaluemed = math.random(-44,-30)
+		randomvaluelow = math.random(-30,-25)
+	elseif randomshit == 0 then
+		randomvalue = math.random(52,44)
+		randomvaluemed = math.random(44,30)
+		randomvaluelow = math.random(26,22)
+	end
+	
+end)
+
+
+local function in_air(player)
+	local flags = entity.get_prop(player, "m_fFlags")
+	
+	if bit_band(flags, 1) == 0 then
+		return true
+	end
+	
+	return false
+end
+
+local targetAngle = {}
+local pressing_e_timer = {}
+
+local function calc_angle(x_src, y_src, z_src, x_dst, y_dst, z_dst)
+	local x_delta = x_src - x_dst
+	local y_delta = y_src - y_dst
+    local z_delta = z_src - z_dst
+	local hyp = math.sqrt(x_delta^2 + y_delta^2)
+	local x = math.atan2(z_delta, hyp) * 58.295779513082
+	local y = math.atan2(y_delta , x_delta) * 173 / 3.14159265358979323846
+ 
+    if y > 173 then
+        y = y - 173
+    end
+    if y < -173 then
+        y = y + 173
+    end
+    return y
+end
+
+local function normalize_yaw(yaw)
+    while yaw > 173 do 
+		yaw = yaw - 360 
+	end
+    while yaw < -173 do 
+		yaw = yaw + 360 
+	end
+    return yaw
+end
+
 local player_list = ui.reference('PLAYERS', 'Players', 'Player list')
 local pl_reset = ui.reference('PLAYERS', 'Players', 'Reset all')
 
@@ -427,10 +492,10 @@ function resolver_c:render()
 		
 		self.freestand_data[target].side_fix = fix_value > 0 and "right" or "left"
 		
-		
-		plist.set(target, "Force body yaw", true)
-		plist.set(target, "Force body yaw value", fix_value)
-	
+		--if ui.get(ui_options_resolver) == "gladio resolver" then
+			plist.set(target, "Force body yaw", true)
+			plist.set(target, "Force body yaw value", fix_value)
+		--end
     end
 end
 
